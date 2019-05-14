@@ -44,4 +44,11 @@ return [
         ],
     ],
 
+    'selenium' => [
+        'chrome' => [
+            'host' => env('SELENIUM_HOST', 'http://localhost'),
+            'port' => env('SELENIUM_PORT', '4444'),
+        ],
+    ]
+
 ];

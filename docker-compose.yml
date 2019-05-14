@@ -25,8 +25,10 @@ services:
     network_mode: bridge
     depends_on:
       - php-fpm
+      - selenium-chrome
     links:
       - mysql
+      - selenium-chrome
 
   nginx:
     container_name: lsp_nginx
@@ -55,3 +57,21 @@ services:
     network_mode: bridge
     ports:
       - 33060:3306
+
+  selenium-chrome:
+    container_name: lsp_selenium_chrome
+    image: selenium/standalone-chrome:3.141.59-neon
+    ports:
+      - 4444:4444
+      - 5900:5900
+    volumes:
+      - /dev/shm:/dev/shm
+    environment:
+      - JAVA_OPTS=-Xmx512m
+      - SCREEN_WIDTH=1366
+      - SCREEN_HEIGHT=768
+      - SCREEN_DEPTH=24
+      - NODE_MAX_INSTANCES=10
+      - NODE_MAX_SESSION=10
+    privileged: true
+    network_mode: bridge
