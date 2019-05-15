@@ -2,18 +2,32 @@
 
 Web application to easily parse content of third party sites.
 
-## Local Test
+## Local
 
 ```bash
-$ docker-compose up -d
 $ cp .env.example .env
+$ docker-compose up -d
 $ ./cmd composer install
 $ ./cmd npm install
-$ ./cmd npm run prod
+$ ./cmd npm run dev
 $ ./cmd php artisan key:generate
 $ ./cmd php artisan migrate
-
 ```
+
+## API
+
+### GET /api/products?page={page}
+
+Fetch all products using pagination.
+
+- `{page}` - current pagination page
+
+### GET /api/products/{id}
+
+Fetch specific product.
+
+- `{id}` - id of specific product
+
 
 ## License
 
