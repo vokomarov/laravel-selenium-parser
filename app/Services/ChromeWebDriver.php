@@ -5,12 +5,12 @@ namespace App\Services;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 
-class SeleniumScrapper
+class ChromeWebDriver
 {
     /**
      * @var \Facebook\WebDriver\Remote\RemoteWebDriver
      */
-    protected $client;
+    protected $driver;
 
     /**
      * SeleniumScrapper constructor.
@@ -22,14 +22,14 @@ class SeleniumScrapper
 
         $caps = DesiredCapabilities::chrome();
 
-        $this->client = RemoteWebDriver::create("{$host}:{$port}/wd/hub", $caps);
+        $this->driver = RemoteWebDriver::create("{$host}:{$port}/wd/hub", $caps);
     }
 
     /**
      * @return \Facebook\WebDriver\Remote\RemoteWebDriver
      */
-    public function getClient(): RemoteWebDriver
+    public function getDriver(): RemoteWebDriver
     {
-        return $this->client;
+        return $this->driver;
     }
 }
