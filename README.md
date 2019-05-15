@@ -2,6 +2,13 @@
 
 Web application to easily parse content of third party sites.
 
+## Scrapping
+
+To start scrap products:
+```bash
+$ ./cmd php artisan products:scrap
+```
+
 ## Local
 
 ```bash
