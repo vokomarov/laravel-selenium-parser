@@ -15,7 +15,7 @@ class ScrapProducts extends Command
      *
      * @var string
      */
-    protected $signature = 'products:scrap';
+    protected $signature = 'products:scrap {category : Url of category started with slash}';
 
     /**
      * The console command description.
@@ -48,12 +48,22 @@ class ScrapProducts extends Command
      */
     public function handle(): void
     {
-        $this->info("Scrapping category /laptops");
-        $this->scrapper->selectCategory('/laptops');
+        $category = $this->argument('category');
+
+        if (empty($category)) {
+            $this->error("Please, specify category to scrap products first.");
+
+            return;
+        }
+
+        $this->info("Scrapping category {$category}");
+        $this->scrapper->selectCategory($category);
 
         $products = $this->scrapper->parseProducts();
+        $foundProducts = count($products);
+        $this->info("Found {$foundProducts} products.");
 
-        $amount = 0;
+        $progress = 0;
 
         foreach ($products as $product) {
             try {
@@ -72,8 +82,6 @@ class ScrapProducts extends Command
                 $product->rating = $fullProduct->rating;
 
                 $product->save();
-
-                $amount++;
             } catch (Exception $exception) {
                 Log::warning("Unable to parse or save product", [
                     'url' => $product->url,
@@ -81,8 +89,10 @@ class ScrapProducts extends Command
                     'message' => $exception->getMessage(),
                 ]);
             }
+
+            $progress++;
         }
 
-        $this->info("Added or updated {$amount} products.");
+        $this->info("Done.");
     }
 }

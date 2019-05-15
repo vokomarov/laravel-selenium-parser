@@ -32,7 +32,7 @@ class Product extends Model
      */
     public function getPriceAttribute(): string
     {
-        return $this->price_main . ',' . substr((string) $this->price_decimal, 2);
+        return $this->price_main . ($this->price_decimal ? (',' . substr((string) $this->price_decimal, 2)) : '');
     }
 
     /**

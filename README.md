@@ -2,14 +2,7 @@
 
 Web application to easily parse content of third party sites.
 
-## Scrapping
-
-To start scrap products:
-```bash
-$ ./cmd php artisan products:scrap
-```
-
-## Local
+## Set Up
 
 ```bash
 $ cp .env.example .env
@@ -20,6 +13,16 @@ $ ./cmd npm run dev
 $ ./cmd php artisan key:generate
 $ ./cmd php artisan migrate
 ```
+
+## Scrapping
+
+To start scrap products:
+
+```bash
+$ ./cmd php artisan products:scrap {category}
+```
+
+- `{category}` - Url of category started with slash, ex: "/laptops"
 
 ## API
 
